@@ -5,4 +5,12 @@
     <string name="text_secondactivity">OurSecondActicity</string>
     <string name="text_back">Back</string>
     <string name="text_main_activity">OurMainActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_country_title">CountryName</string>
+    <string name="test_country_description">CountryDescription</string>
+    <string name="text_list_small_cities">smallCities</string>
+    <string name="text_list_big_cities">BigCities</string>
+    <string name="text_bigCities">bigCities</string>
+    <string name="text_small_cities">smallCities</string>
 </resources>
