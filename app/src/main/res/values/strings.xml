@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UI-Test-Sample</string>
+    <string name="text_mainactivity">OurMainActivity</string>
+    <string name="text_next">NextActivity</string>
+    <string name="text_secondactivity">OurSecondActicity</string>
+    <string name="text_back">Back</string>
+    <string name="text_main_activity">OurMainActivity</string>
+</resources>
