@@ -1,10 +1,10 @@
-package com.example.ui_test_sample.fragmetExample
+package com.example.ui_test_sample.fragmentExample
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ui_test_sample.R
 import com.example.ui_test_sample.databinding.ActivityHostBinding
-import com.example.ui_test_sample.fragmetExample.fragments.CountryDetailFragment
+import com.example.ui_test_sample.fragmentExample.fragments.CountryDetailFragment
 
 class HostActivity : AppCompatActivity() {
 

@@ -3,8 +3,7 @@
     package="com.example.ui_test_sample">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,26 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.UITestSample">
-        <activity
-            android:name=".PickImageActivity"
-            android:exported="true" >
+
+        <activity android:name=".fragmentExample.HostActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".fragmetExample.HostActivity"
-            android:exported="true">
 
-        </activity>
-        <activity
-            android:name=".SecondActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"></activity>
+
+
     </application>
 
 </manifest>

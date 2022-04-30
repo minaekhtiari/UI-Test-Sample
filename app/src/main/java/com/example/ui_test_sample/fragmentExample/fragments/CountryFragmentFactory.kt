@@ -1,4 +1,4 @@
-package com.example.ui_test_sample.fragmetExample.fragments
+package com.example.ui_test_sample.fragmentExample.fragments
 
 
 import androidx.fragment.app.FragmentFactory

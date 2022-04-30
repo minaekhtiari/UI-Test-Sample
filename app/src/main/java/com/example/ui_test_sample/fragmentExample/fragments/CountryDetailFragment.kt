@@ -1,4 +1,4 @@
-package com.example.ui_test_sample.fragmetExample.fragments
+package com.example.ui_test_sample.fragmentExample.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.ui_test_sample.R
 import com.example.ui_test_sample.databinding.FragmentCountryDetailBinding
-import com.example.ui_test_sample.fragmetExample.data.Country
-import com.example.ui_test_sample.fragmetExample.data.CountryRemoteDataSource
+import com.example.ui_test_sample.fragmentExample.data.Country
+import com.example.ui_test_sample.fragmentExample.data.CountryRemoteDataSource
 import java.lang.System.load
 
 
@@ -64,7 +64,7 @@ class CountryDetailFragment : Fragment() {
           val bundle=Bundle()
             bundle.putStringArrayList("args_SmallCities",country.small_cities)
             activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container,SmallCitiesFragment::class.java,bundle)
+                ?.replace(R.id.container, SmallCitiesFragment::class.java,bundle)
                 ?.addToBackStack("SmallCitiesFragment")
                 ?.commit()
         }

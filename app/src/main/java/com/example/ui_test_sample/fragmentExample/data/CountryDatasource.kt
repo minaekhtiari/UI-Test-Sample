@@ -1,4 +1,4 @@
-package com.example.ui_test_sample.fragmetExample.data
+package com.example.ui_test_sample.fragmentExample.data
 
 interface CountryDatasource {
     fun getCountry(countryId: Int): Country?
