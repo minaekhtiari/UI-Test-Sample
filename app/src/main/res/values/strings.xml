@@ -13,4 +13,5 @@
     <string name="text_list_big_cities">BigCities</string>
     <string name="text_bigCities">bigCities</string>
     <string name="text_small_cities">smallCities</string>
+    <string name="text_select_image_from_gallery">PickImageFromGallery</string>
 </resources>
