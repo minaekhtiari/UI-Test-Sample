@@ -6,4 +6,6 @@
     <string name="text_back">Back</string>
     <string name="text_main_activity">OurMainActivity</string>
     <string name="text_pick_image_from_gallery">SelectImage</string>
+    <string name="text_open_camera">OpenCamera</string>
+    <string name="openCamera">Open_Camera</string>
 </resources>
