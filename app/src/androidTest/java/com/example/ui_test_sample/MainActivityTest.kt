@@ -1,13 +1,27 @@
 package com.example.ui_test_sample
 
 
+import android.app.Activity.RESULT_OK
+import android.app.Instrumentation
+import android.content.ContentResolver
+import android.content.Intent
+import android.content.res.Resources
+import android.net.Uri
+import android.provider.MediaStore
 import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.intent.Intents.intended
+import androidx.test.espresso.intent.Intents.intending
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasAction
+import androidx.test.espresso.intent.matcher.IntentMatchers.hasData
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.platform.app.InstrumentationRegistry
+import org.hamcrest.Matcher
+import org.hamcrest.core.AllOf.allOf
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,61 +32,31 @@ import org.junit.runner.RunWith
 class MainActivityTest {
 
     @Test
-    fun testIsActivityInView() {
-      val activityScenario= ActivityScenario.launch(MainActivity::class.java)
-       onView(withId(R.id.main))
-           .check(matches(isDisplayed()))
+    fun  validateIntentSentToPickImage() {
+
+        // setup
+        val expectedIntent: Matcher<Intent> = allOf(
+            hasAction(Intent.ACTION_PICK),
+            hasData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        )
+        val activityResult = createGalleryPickActivityResult()
+        intending(expectedIntent).respondWith(activityResult)
+
+        // Execute and Verify
+        onView(withId(R.id.button_open_gallery)).perform(click())
+        intended(expectedIntent)
     }
 
-    @Test
-    fun visibility_title_nextButton() {
-        val activityScenario= ActivityScenario.launch(MainActivity::class.java)
-     activityScenario.onActivity {
-         onView(withId(R.id.activity_main_title))
-             .check(matches(isDisplayed()))
-
-         onView(withId(R.id.button_next)).check(matches(isDisplayed()))
-     }
-    }
-
-    @Test
-    fun isText_string_displayed() {
-        val activityScenario= ActivityScenario.launch(MainActivity::class.java)
-        onView(withId(R.id.activity_main_title))
-            .check(matches(withText(R.string.text_main_activity)))
-    }
-
-
-    @Test
-    fun test_navSecondaryActivity() {
-
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        onView(withId(R.id.button_next)).perform(click())
-
-        onView(withId(R.id.second)).check(matches(isDisplayed()))
-    }
-
-    /**
-     * Test both ways to navigate from SecondaryActivity to MainActivity
-     */
-    @Test
-    fun test_backPress_toMainActivity() {
-
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        onView(withId(R.id.button_next)).perform(click())
-
-        onView(withId(R.id.second)).check(matches(isDisplayed()))
-
-        onView(withId(R.id.button_back)).perform(click()) // method 1
-
-        onView(withId(R.id.main)).check(matches(isDisplayed()))
-
-        onView(withId(R.id.button_next)).perform(click())
-
-        pressBack() // method 2
-
-        onView(withId(R.id.main)).check(matches(isDisplayed()))
+    private fun createGalleryPickActivityResult(): Instrumentation.ActivityResult {
+        val resources: Resources = InstrumentationRegistry.getInstrumentation().context.resources
+        val imageUri = Uri.parse(
+            ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+                    resources.getResourcePackageName(R.drawable.ic_launcher_background) + '/' +
+                    resources.getResourceTypeName(R.drawable.ic_launcher_background) + '/' +
+                    resources.getResourceEntryName(R.drawable.ic_launcher_background)
+        )
+        val resultIntent = Intent()
+        resultIntent.setData(imageUri)
+        return Instrumentation.ActivityResult(RESULT_OK, resultIntent)
     }
 }
