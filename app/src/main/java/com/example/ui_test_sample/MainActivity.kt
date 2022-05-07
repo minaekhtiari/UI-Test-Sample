@@ -3,6 +3,7 @@ package com.example.ui_test_sample
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
 import com.example.ui_test_sample.databinding.ActivityMainBinding
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
                 ){ dialog, text ->
                     binding.activityMainTitle.text=text
                     dialog.icon(R.drawable.ic_launcher_background)
+                    showToast(buildToastTest(text.toString()))
 
                 }
               title(R.string.text_enter_text)
@@ -41,5 +43,13 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
+      private  fun showToast(message:String)
+      {
+          Toast.makeText(this,message,Toast.LENGTH_LONG).show()
+      }
+    companion object{
+        fun buildToastTest(text:String):String{
+            return "Your Test is $text"
+        }
+    }
 }

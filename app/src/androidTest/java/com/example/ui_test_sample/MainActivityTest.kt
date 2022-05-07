@@ -10,6 +10,7 @@ import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import com.example.ui_test_sample.MainActivity.Companion.buildToastTest
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -40,5 +41,8 @@ class MainActivityTest {
        onView(withText(R.string.text_enter_text)).check(doesNotExist())
 
        onView(withId(R.id.activity_main_title)).check(matches(withText(text)))
+
+       //Testing Toast Display, is the Toast massage correct
+       onView(withText(buildToastTest(text))).inRoot(ToastMatcher()).check(matches(isDisplayed()))
    }
 }
