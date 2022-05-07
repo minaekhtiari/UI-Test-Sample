@@ -3,6 +3,8 @@ package com.example.ui_test_sample
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.afollestad.materialdialogs.MaterialDialog
+import com.afollestad.materialdialogs.input.input
 import com.example.ui_test_sample.databinding.ActivityMainBinding
 
 
@@ -16,10 +18,28 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.buttonNext.setOnClickListener {
-            val intent = Intent(this, SecondActivity::class.java)
-            startActivity(intent)
+            showDialog()
         }
 
 
     }
+
+    private fun showDialog() {
+        MaterialDialog(this)
+            .show {
+                input (
+                    waitForPositiveButton = true,  //we can't dismiss this
+                    allowEmpty = false
+                ){ dialog, text ->
+                    binding.activityMainTitle.text=text
+                    dialog.icon(R.drawable.ic_launcher_background)
+
+                }
+              title(R.string.text_enter_text)
+                positiveButton(R.string.text_ok)
+            }
+    }
+
+
+
 }

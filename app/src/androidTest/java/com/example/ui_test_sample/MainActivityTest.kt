@@ -5,6 +5,8 @@ import androidx.test.core.app.ActivityScenario
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.Espresso.pressBack
 import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
+import androidx.test.espresso.assertion.ViewAssertions.doesNotExist
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
@@ -17,62 +19,26 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4ClassRunner::class)
 class MainActivityTest {
 
-    @Test
-    fun testIsActivityInView() {
-      val activityScenario= ActivityScenario.launch(MainActivity::class.java)
-       onView(withId(R.id.main))
-           .check(matches(isDisplayed()))
-    }
+   @Test
+   fun testShowDialogTextInput(){
 
-    @Test
-    fun visibility_title_nextButton() {
-        val activityScenario= ActivityScenario.launch(MainActivity::class.java)
-     activityScenario.onActivity {
-         onView(withId(R.id.activity_main_title))
-             .check(matches(isDisplayed()))
+       val activityScenario= ActivityScenario.launch(MainActivity::class.java)
+       val text="Mina"
 
-         onView(withId(R.id.button_next)).check(matches(isDisplayed()))
-     }
-    }
+       onView(withId(R.id.button_next)).perform(click())
+       onView(withText(R.string.text_enter_text)).check(matches(isDisplayed()))
+       onView(withText(R.string.text_ok)).perform(click())
 
-    @Test
-    fun isText_string_displayed() {
-        val activityScenario= ActivityScenario.launch(MainActivity::class.java)
-        onView(withId(R.id.activity_main_title))
-            .check(matches(withText(R.string.text_main_activity)))
-    }
+       //can't click empty dialog
+       onView(withText(R.string.text_enter_text)).check(matches(isDisplayed()))
 
+       //this Id from Material Dialog Github
+       onView(withId(com.afollestad.materialdialogs.input.R.id.md_input_message))
+           .perform(typeText(text))
 
-    @Test
-    fun test_navSecondaryActivity() {
+       onView(withText(R.string.text_ok)).perform(click())
+       onView(withText(R.string.text_enter_text)).check(doesNotExist())
 
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        onView(withId(R.id.button_next)).perform(click())
-
-        onView(withId(R.id.second)).check(matches(isDisplayed()))
-    }
-
-    /**
-     * Test both ways to navigate from SecondaryActivity to MainActivity
-     */
-    @Test
-    fun test_backPress_toMainActivity() {
-
-        val activityScenario = ActivityScenario.launch(MainActivity::class.java)
-
-        onView(withId(R.id.button_next)).perform(click())
-
-        onView(withId(R.id.second)).check(matches(isDisplayed()))
-
-        onView(withId(R.id.button_back)).perform(click()) // method 1
-
-        onView(withId(R.id.main)).check(matches(isDisplayed()))
-
-        onView(withId(R.id.button_next)).perform(click())
-
-        pressBack() // method 2
-
-        onView(withId(R.id.main)).check(matches(isDisplayed()))
-    }
+       onView(withId(R.id.activity_main_title)).check(matches(withText(text)))
+   }
 }
