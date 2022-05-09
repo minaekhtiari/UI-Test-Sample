@@ -8,6 +8,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.example.ui_test_sample.R
+import com.example.ui_test_sample.fragmentExample.data.Country
 import com.example.ui_test_sample.fragmentExample.data.DummyCountry.Iran
 import com.example.ui_test_sample.fragmentExample.fragments.CountryDetailFragment
 import com.example.ui_test_sample.fragmentExample.fragments.CountryFragmentFactory
@@ -22,19 +23,22 @@ class CountryDetailFragmentTest {
     @Test
     fun isCountryDataVisible() {
         // SETUP
-        val country = Iran
-        val fragmentFactory = CountryFragmentFactory()
-        val bundle = Bundle()
-        bundle.putInt("country_id", country.id)
-        val scenario = launchFragmentInContainer<CountryDetailFragment>(
-            fragmentArgs = bundle,
-            factory =fragmentFactory
+        val countryId = 1
+        val name = "Iran"
+        val description = "Iran, a mountainous, arid, and ethnically diverse country of southwestern Asia."
+        val country = Country(
+            countryId,
+            name,
+            "https://cdn.wallpapersafari.com/17/83/srDn3R.jpg",
+            description ,
+            arrayListOf("Tehran", "Shiraz", "Tabriz"),
+
+            arrayListOf("Rasht", "Uromia")
         )
 
-        // VERIFY
-        onView(withId(R.id.country_title)).check(matches(withText(country.name)))
 
-        onView(withId(R.id.country_description)).check(matches(withText(country.description)))
+
+
     }
 
 

@@ -66,4 +66,8 @@ dependencies {
     def fragment_version = "1.5.0-beta01" // must use for new factory stuff
     debugImplementation "androidx.fragment:fragment-testing:$fragment_version"
     implementation "androidx.fragment:fragment-ktx:$fragment_version"
+
+    // Mockk.io
+    def mockk_version = "1.9.3"
+    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
 }
