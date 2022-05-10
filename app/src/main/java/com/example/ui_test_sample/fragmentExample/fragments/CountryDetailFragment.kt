@@ -24,7 +24,7 @@ class CountryDetailFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let { args ->
             args.getInt("country_id").let { countryId ->
-                CountryRemoteDataSource.getCountry(countryId)?.let { contryFromRemote ->
+                CountryRemoteDataSource().getCountry(countryId)?.let { contryFromRemote ->
                     country = contryFromRemote
 
                 }
